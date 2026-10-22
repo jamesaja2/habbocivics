@@ -1,0 +1,260 @@
+.window {
+  position: fixed;
+  border: 2px solid #000;
+  border-radius: 10px;
+  background: #d9e6ef;
+  box-shadow: 0 4px 0 #00000040, 0 0 0 2px #3b5f76 inset;
+  overflow: hidden;
+}
+
+.titlebar {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  color: #0b2a3a;
+  border-bottom: 2px solid #000;
+  background: linear-gradient(180deg, #b6d5e9 0%, #6fa6c3 100%);
+}
+
+.title {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px #e6f3fa;
+}
+
+.closeBtn {
+  border-radius: 9999px !important;
+  background: #dc2626 !important;
+  box-shadow: 0 0 0 2px #000 inset;
+  position: relative;
+}
+.closeBtn:hover { filter: brightness(0.95); }
+.closeBtn:active { transform: translateY(1px); }
+.closeIcon { width: 12px; height: 12px; position: relative; display: block; }
+.closeIcon::before, .closeIcon::after {
+  content: ""; position: absolute; left: 5px; top: 1px; width: 2px; height: 10px; background: #000;
+}
+.closeIcon::before { transform: rotate(45deg); } .closeIcon::after { transform: rotate(-45deg); }
+
+.windowInner { height: calc(100% - 40px); background: #eef6fb; border-top: 2px solid #3b5f76; }
+.windowBody { display: flex; flex-direction: column; height: 100%; background: #eef6fb; }
+
+.logoBlock {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 28px; padding: 0 10px; border: 2px solid #000; border-radius: 6px;
+  background: linear-gradient(#ffcc00, #f3b700); box-shadow: 0 2px 0 #00000040;
+}
+.logoWord { font-weight: 900; letter-spacing: 0.5px; color: #000; text-shadow: 1px 1px #ffe680; font-size: 13px; }
+
+.playFrame { border: 2px solid #000; border-radius: 10px; background: #c6d9e6; box-shadow: 0 4px 0 #00000040, inset 0 0 0 2px #3b5f76; overflow: hidden; }
+
+.pixelButton {
+  border: 2px solid #000 !important;
+  background: linear-gradient(#ffcf4d, #f59e0b) !important;
+  color: #1f1300 !important;
+  box-shadow: 0 2px 0 #00000040, inset 0 0 0 2px #a67c00 !important;
+}
+.pixelButton:disabled { opacity: 0.6; }
+
+.pixelInput { border: 2px solid #000 !important; box-shadow: inset 0 0 0 2px #6fa6c3 !important; background: #fff !important; }
+
+.tabBar { display: flex; gap: 2px; padding: 6px 6px 0 6px; border-bottom: 2px solid #3b5f76; background: linear-gradient(180deg, #b6d5e9 0%, #6fa6c3 100%); }
+.tab, .tabActive {
+  padding: 6px 10px; border: 2px solid #000; border-bottom-width: 0; border-top-left-radius: 8px; border-top-right-radius: 8px;
+  background: #9ec3d8; font-size: 12px; font-weight: 700;
+}
+.tabActive { background: #eef6fb; }
+
+.navRow {
+  display: flex; align-items: center; gap: 8px; padding: 6px 8px; border: 2px solid #000; border-radius: 8px;
+  background: linear-gradient(#d7f5dd, #b6eec3); box-shadow: inset 0 0 0 2px #3aa86b;
+}
+.navDot { width: 10px; height: 10px; background: #16a34a; border: 2px solid #000; border-radius: 9999px; }
+.statusPill { font-size: 11px; padding: 2px 8px; border: 2px solid #000; border-radius: 9999px; background: #22c55e; color: #072f14; }
+.goButton {
+  border: 2px solid #000 !important; background: linear-gradient(#ffb84d, #f97316) !important; color: #1f1300 !important;
+  padding: 0 10px !important; height: 28px !important; box-shadow: inset 0 0 0 2px #a04f06 !important;
+}
+
+.habboModalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 15, 23, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: modalFadeIn 0.15s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.habboModalCard {
+  width: 100%;
+  max-width: 580px;
+  border: 3px solid #000;
+  border-radius: 12px;
+  background: #d4e4f0;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 2px #447493;
+  overflow: hidden;
+}
+
+.habboModalTitleBar {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  border-bottom: 2px solid #000;
+  background: linear-gradient(180deg, #96c4df 0%, #548fae 100%);
+}
+
+.habboBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.3);
+}
+
+.badgeViolation {
+  background: linear-gradient(180deg, #f87171 0%, #dc2626 100%);
+  color: #fff;
+  text-shadow: 1px 1px 0 #7f1d1d;
+}
+
+.badgeObligation {
+  background: linear-gradient(180deg, #fb923c 0%, #ea580c 100%);
+  color: #fff;
+  text-shadow: 1px 1px 0 #7c2d12;
+}
+
+.badgeBoth {
+  background: linear-gradient(180deg, #c084fc 0%, #9333ea 100%);
+  color: #fff;
+  text-shadow: 1px 1px 0 #581c87;
+}
+
+.badgeSolved {
+  background: linear-gradient(180deg, #4ade80 0%, #16a34a 100%);
+  color: #064e3b;
+  text-shadow: 0 1px 0 #bbf7d0;
+}
+
+.habboSectionBox {
+  border: 2px solid #000;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 12px;
+  box-shadow: inset 0 0 0 2px #d0e1ee, 0 2px 0 rgba(0,0,0,0.1);
+}
+
+.habboSpeechBubble {
+  position: relative;
+  border: 2px solid #000;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 10px 14px;
+  color: #0f172a;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+}
+
+.habboSpeechBubble::after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  left: 24px;
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 9px solid #000;
+}
+
+.habboSpeechBubble::before {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 26px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #ffffff;
+  z-index: 1;
+}
+
+.pixelButtonPrimary {
+  border: 2px solid #000 !important;
+  background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 3px 0 #000, inset 0 0 0 1px #7dd3fc !important;
+  transition: transform 0.05s ease, filter 0.05s ease;
+}
+.pixelButtonPrimary:hover {
+  filter: brightness(1.08);
+}
+.pixelButtonPrimary:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #000, inset 0 0 0 1px #7dd3fc !important;
+}
+
+.pixelButtonGreen {
+  border: 2px solid #000 !important;
+  background: linear-gradient(180deg, #4ade80 0%, #16a34a 100%) !important;
+  color: #064e3b !important;
+  font-weight: 800 !important;
+  box-shadow: 0 3px 0 #000, inset 0 0 0 1px #86efac !important;
+}
+.pixelButtonGreen:hover {
+  filter: brightness(1.08);
+}
+.pixelButtonGreen:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #000, inset 0 0 0 1px #86efac !important;
+}
+
+.pixelButtonYellow {
+  border: 2px solid #000 !important;
+  background: linear-gradient(180deg, #fde047 0%, #eab308 100%) !important;
+  color: #422006 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 3px 0 #000, inset 0 0 0 1px #fef08a !important;
+}
+.pixelButtonYellow:hover {
+  filter: brightness(1.08);
+}
+.pixelButtonYellow:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #000, inset 0 0 0 1px #fef08a !important;
+}
+
+.pixelButtonGray {
+  border: 2px solid #000 !important;
+  background: linear-gradient(180deg, #cbd5e1 0%, #94a3b8 100%) !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  box-shadow: 0 3px 0 #000, inset 0 0 0 1px #f1f5f9 !important;
+}
+.pixelButtonGray:hover {
+  filter: brightness(1.08);
+}
+.pixelButtonGray:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #000, inset 0 0 0 1px #f1f5f9 !important;
+}
+
