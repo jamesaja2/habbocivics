@@ -4,7 +4,7 @@ import React from "react"
 import { type CivicStage } from "@/lib/civics-data"
 import { soundManager } from "@/lib/audio-effects"
 import styles from "@/styles/habbo.module.css"
-import { Map, BookOpen, Volume2, VolumeX, Sparkles, Trophy, Smile, Flame, Compass } from "lucide-react"
+import { Map, BookOpen, Volume2, VolumeX, Sparkles, Trophy, Smile, Flame, Compass, Film } from "lucide-react"
 
 interface Props {
   currentStage: CivicStage
@@ -15,6 +15,7 @@ interface Props {
   onOpenStageNavigator: () => void
   onOpenDossier: () => void
   onOpenTutorial: () => void
+  onOpenPromoVideo: () => void
   isAudioOn: boolean
   onToggleAudio: () => void
   isDancing: boolean
@@ -31,6 +32,8 @@ export default function HabboCivicsHeader({
   totalCasesOverall,
   onOpenStageNavigator,
   onOpenDossier,
+  onOpenTutorial,
+  onOpenPromoVideo,
   isAudioOn,
   onToggleAudio,
   isDancing,
@@ -100,6 +103,19 @@ export default function HabboCivicsHeader({
         {/* Right: Actions (Navigator, Dossier, Audio, Actions) */}
         {/* Right: Actions (Navigator, Dossier, Tutorial, Audio, Actions) */}
         <div className="flex items-center gap-1.5 sm:gap-2">
+          {/* Promo Video Button */}
+          <button
+            onClick={() => {
+              soundManager.playClick()
+              onOpenPromoVideo()
+            }}
+            className={`${styles.pixelButtonYellow} px-2 sm:px-2.5 py-1.5 rounded text-xs font-bold flex items-center gap-1 cursor-pointer bg-gradient-to-r from-amber-400 to-yellow-300 text-black animate-pulse`}
+            title="Tonton Video Promosi Remotion (16:9)"
+          >
+            <Film className="w-3.5 h-3.5" />
+            <span className="font-pixel text-[10px] hidden sm:inline">Video Promo</span>
+          </button>
+
           {/* Tutorial / Panduan Button */}
           <button
             onClick={() => {

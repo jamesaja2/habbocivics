@@ -13,6 +13,7 @@ import HabboStageSelector from "@/components/habbo-stage-selector"
 import HabboDossierModal from "@/components/habbo-dossier-modal"
 import HabboSuccessBanner from "@/components/habbo-success-banner"
 import HabboTutorialModal from "@/components/habbo-tutorial-modal"
+import HabboPromoModal from "@/components/habbo-promo-modal"
 
 export default function CivicsGamePage() {
   // Current active stage
@@ -28,6 +29,8 @@ export default function CivicsGamePage() {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const [isDossierOpen, setIsDossierOpen] = useState(false)
   const [isTutorialOpen, setIsTutorialOpen] = useState(false)
+  const [isPromoOpen, setIsPromoOpen] = useState(false)
+  const [isFirstTimePromo, setIsFirstTimePromo] = useState(false)
   const [showSuccessBanner, setShowSuccessBanner] = useState(false)
   const [dismissedStages, setDismissedStages] = useState<Set<string>>(new Set())
 
@@ -39,7 +42,7 @@ export default function CivicsGamePage() {
   const [isAudioOn, setIsAudioOn] = useState(false)
   const chipRef = useRef<ChipTune | null>(null)
 
-  // Hydrate solved cases & check tutorial status on mount
+  // Hydrate solved cases & check onboarding sequence (Promo Video first, then Tutorial)
   useEffect(() => {
     try {
       const saved = localStorage.getItem("habbo_civics_solved_ids")
@@ -50,9 +53,28 @@ export default function CivicsGamePage() {
         }
       }
 
+      const promoSeen = localStorage.getItem("habbo_civics_promo_seen")
       const tourDone = localStorage.getItem("habbo_civics_tour_done")
-      if (!tourDone) {
-        // Automatically open interactive tutorial for new players!
+
+      if (!promoSeen) {
+        // Pop-up video promosi muncul pertama kali sebelum tutorial!
+        setIsFirstTimePromo(true)
+        setIsPromoOpen(true)
+      } else if (!tourDone) {
+        setIsTutorialOpen(true)
+      }
+    } catch {
+      // Ignored
+    }
+  }, [])
+
+  // Close promo modal and proceed to tutorial if not yet completed
+  const handleClosePromo = useCallback((proceedToTour = false) => {
+    setIsPromoOpen(false)
+    try {
+      localStorage.setItem("habbo_civics_promo_seen", "true")
+      const tourDone = localStorage.getItem("habbo_civics_tour_done")
+      if (proceedToTour || !tourDone) {
         setIsTutorialOpen(true)
       }
     } catch {
@@ -166,6 +188,10 @@ export default function CivicsGamePage() {
         onOpenStageNavigator={() => setIsNavigatorOpen(true)}
         onOpenDossier={() => setIsDossierOpen(true)}
         onOpenTutorial={() => setIsTutorialOpen(true)}
+        onOpenPromoVideo={() => {
+          setIsFirstTimePromo(false)
+          setIsPromoOpen(true)
+        }}
         isAudioOn={isAudioOn}
         onToggleAudio={handleToggleAudio}
         isDancing={isDancing}
@@ -222,6 +248,14 @@ export default function CivicsGamePage() {
           onMarkSolved={handleMarkSolved}
         />
       )}
+
+      {/* 16:9 Official Promotional Video Modal (Remotion) - Pop-up pertama sebelum tutorial */}
+      <HabboPromoModal
+        isOpen={isPromoOpen}
+        onClose={() => handleClosePromo(false)}
+        onProceedToTutorial={() => handleClosePromo(true)}
+        isFirstTime={isFirstTimePromo}
+      />
 
       {/* Onboarding Interactive Tour / Tutorial Modal */}
       <HabboTutorialModal
